@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "ihmpendu.h"
 #include "CUJeuPendu.h"
+#include <time.h>
 
 int main(int argc, char *argv[])
 {
@@ -12,7 +13,6 @@ int main(int argc, char *argv[])
 
     ihm.RecupAddJeu(&jeuP);
     jeuP.RecupAddIHM(&ihm);
-
     ihm.show();
     return a.exec();
 }

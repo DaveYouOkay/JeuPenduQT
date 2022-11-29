@@ -2,12 +2,13 @@
 #include "ihmpendu.h"
 #include "qfile.h"
 #include "qtextstream.h"
-
+#include <random>
 
 CUJeuPendu::CUJeuPendu()
 {
+    srand(time(NULL));
     updateWordsFiles();
-    findWordsNumber();
+
 }
 
 CUJeuPendu::~CUJeuPendu() { }
@@ -22,27 +23,30 @@ void CUJeuPendu::setWordsFile(QString aWordsFile) //set unFichierDeMots
 
 int CUJeuPendu::getErrorNb() //get Nombres d'Erreur
 {    return errorNumber;     }
-
 void CUJeuPendu::setErrorNb(int errorNb) //set Nombres d'Erreur
 {    errorNumber = errorNb;     }
 
 QString CUJeuPendu::getWordPlay() //get MotEnCours
 {   return wordPlay;    }
-
 void CUJeuPendu::setWordPlay(QString aWordPlay) //set MotEnCours
 {    wordPlay = aWordPlay;  }
 
 QString CUJeuPendu::getWordSelect() //get MotChois
 {    return wordSelect;     }
 
-
 int CUJeuPendu::randomDraw(int min, int max)  // Tirage aléatoire du mots à trouver
 {
-    int randomNumber;
-    srand(time(NULL));
-    randomNumber = rand() % max - min + 1;
-    return randomNumber;
 
+    int randomNumber,reinit;
+    reinit = rand() % (100-1)+1;
+
+    //std::random_device dev;
+    //https://www.reddit.com/r/Cplusplus/comments/wilcxu/srand_function_not_working/
+    std::mt19937 rng(reinit);
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(min,max); // distribution in range [1, 6]
+    randomNumber = dist6(rng);
+
+    return randomNumber;
 }
 
 void CUJeuPendu::updateWordsFiles()  //mettre à jour le fichier de mots
@@ -61,12 +65,20 @@ QString CUJeuPendu::readWord(int randomnumber)  //lire le mots aleatoire trouver
     WordsFile.open(QIODevice::ReadOnly);
     QTextStream WordTextFile(&WordsFile);
     QString word;
-
-    for(int pt=0;pt<randomnumber;pt++)
+    int pt=0;
+    while(pt<randomnumber)
     {
-        word = WordTextFile.readLine(randomnumber);
+        word = WordsFile.readLine();
+        pt++;
     }
-    wordSelect=word;
+
+    for(int ptr=0;ptr<word.size();ptr++)
+    {
+        word[ptr] = word[ptr].toUpper();
+    }
+
+    WordsFile.close();
+    wordSelect = word;
 
     return word;
 }
@@ -93,13 +105,18 @@ void CUJeuPendu::findWordsNumber()
 
 void CUJeuPendu::startGame()
 {
-    int r;
+
     playerName = addIHMPendu->saisirNom();
-    r=randomDraw(0,wordsNumber);
-    readWord(r);
+    findWordsNumber();
+    errorNumber = randomDraw(1,wordsNumber);
+    readWord(errorNumber);
 
 
 
+    for(int i=0;i<(wordSelect.size());i++)
+    {
+        wordPlay = wordPlay + "_";
+    }
 }
 
 
