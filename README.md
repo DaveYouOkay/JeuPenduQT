@@ -1,5 +1,5 @@
 # JeuPenduQT
-Jeu du Pendu sur QT Creator 5.12.0 avec Interface Graphique 
+## Jeu du Pendu sur QT Creator 5.0.2 avec Interface Graphique 
 
 <p>
 Tous les programmes demandés sont à réaliser sous Qt (sous Linux).
