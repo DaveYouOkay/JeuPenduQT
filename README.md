@@ -10,7 +10,7 @@ Principe général du jeu : Un mot à deviner est choisi au hasard. Le joueur, a
 </p>
 
 <p>
-### 2.Fichier de mots :
+### 2. Fichier de mots :
   
 Le mot à deviner est choisi au hasard dans un fichier texte. Le fichier par défaut se nomme : "liste_mots_sans_accents.txt"
 L'utilisateur doit pouvoir changer ce fichier et ce changement doit rester valable à la prochaine utilisation du jeu.
