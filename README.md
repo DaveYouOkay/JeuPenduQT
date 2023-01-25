@@ -28,8 +28,7 @@ Un fichier de configuration nommé "config.txt" va être utilisé. Ce fichier do
 Pour programmer ce jeu, 2 classes doivent être utilisées. Elles devront être reliées dans une relation d'association.
 Un diagramme de classes est donné à titre indicatif :
   
-  [Uploading imageclassePendu.jpg…]()
-
+![imageclassePendu](https://user-images.githubusercontent.com/97070339/214686979-e5e905ff-8f69-4acf-98e3-053b61e64de6.jpg)
   
   Dans ce cas, au début, les 2 classes ne se connaissent pas. 
   C'est donc au programme principal de créer 1 objet de chaque classe et d'appeler les méthodes RecupAdd... de façon à ce que les classes puissent utiliser les méthodes de l'autre classe  
